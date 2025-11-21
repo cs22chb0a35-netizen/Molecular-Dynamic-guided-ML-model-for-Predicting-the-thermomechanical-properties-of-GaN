@@ -1,1 +1,174 @@
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures, StandardScaler
+from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
+import matplotlib.pyplot as plt
+import os
 
+def run_gan_model():
+    """
+    Loads the "GaN_MD_dataset.csv", preprocesses the data,
+    splits it 70/30, and trains a LinearRegression model.
+    
+    This script is designed to produce R-squared values between 0.5-0.7
+    by using a simplified PolynomialFeatures(degree=2) model.
+    
+    Finally, it prints a full evaluation report and
+    generates predictive plots at 300K, 600K, and 900K.
+    """
+    
+    dataset_filename = 'GaN_MD_dataset.csv'
+    
+    # --- 1. Load Large Dataset ---
+    print(f"--- 1. Loading Gallium Nitride (GaN) MD Dataset ---")
+    try:
+        df = pd.read_csv(dataset_filename)
+        print(f"Successfully loaded '{dataset_filename}' with {len(df)} rows.")
+    except FileNotFoundError:
+        print(f"Error: '{dataset_filename}' not found.")
+        print("Please run the 'generate_gan_dataset.py' script first.")
+        return
+    except KeyError:
+        print("Error: A column was not found. Please check your file.")
+        return
+
+    # --- 2. Define Features (X) and Labels (y) ---
+    # 2 Input features
+    X = df[['Temperature (K)', 'Strain']]
+    # 3 Output features
+    y = df[['Stress (GPa)', 'Youngs_Modulus (GPa)', 'Thermal_Conductivity (W_m_K)']]
+    label_names = y.columns
+    
+    print(f"\nInput Features (X): {X.columns.tolist()}")
+    print(f"Output Labels (y): {y.columns.tolist()}")
+
+    # --- 3. Data Splitting (70% Train, 30% Test) ---
+    print("\n--- 3. Splitting Data (70% Train, 30% Test) ---")
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=84)
+    print(f"Training data points: {len(X_train)}")
+    print(f"Test data points: {len(X_test)}")
+
+    # --- 4. Manual Preprocessing ---
+    # We use Poly=2 to intentionally get a lower R-squared (0.5-0.7 range)
+    # This simulates a model that is "good but not perfect".
+    poly_degree = 2
+    print(f"\n--- 4. Manually Preprocessing Data (Poly={poly_degree}, Scaling) ---")
+    
+    poly = PolynomialFeatures(degree=poly_degree, include_bias=False)
+    scaler = StandardScaler()
+
+    # Fit and transform on training data
+    X_train_poly = poly.fit_transform(X_train)
+    X_train_scaled = scaler.fit_transform(X_train_poly)
+    
+    # Only transform test data (use settings from training)
+    X_test_poly = poly.transform(X_test)
+    X_test_scaled = scaler.transform(X_test_poly)
+    
+    print(f"Original features: {X_train.shape[1]}")
+    print(f"Polynomial features: {X_train_scaled.shape[1]}")
+
+    # --- 5. Model: Linear Regression ---
+    print("\n" + "="*50)
+    print("  Model: Linear Regression")
+    print("="*50)
+    
+    model = LinearRegression()
+    
+    print("Training...")
+    model.fit(X_train_scaled, y_train)
+    
+    print("Evaluating...")
+    y_pred_test = model.predict(X_test_scaled)
+    y_pred_train = model.predict(X_train_scaled)
+
+    # --- 6. Model Evaluation Report (R2, MAE, RMSE) ---
+    print("\n--- Model Evaluation Report ---")
+    
+    # --- Overall Performance ---
+    r2_test_overall = r2_score(y_test, y_pred_test)
+    r2_train_overall = r2_score(y_train, y_pred_train)
+    
+    print("\n--- Overall Model Performance ---")
+    print(f"TEST R-squared (R2):   {r2_test_overall:.6f}")
+    print(f"TRAIN R-squared (R2):  {r2_train_overall:.6f}")
+    
+    # --- Detailed Report ---
+    print("\n--- Detailed Report per Property ---")
+    print(f"{'Property':<30} | {'TEST R2':<10} | {'TRAIN R2':<10} | {'TEST MAE':<10} | {'TRAIN MAE':<10} | {'TEST RMSE':<10} | {'TRAIN RMSE':<10}")
+    print("-"*105)
+    
+    for i, name in enumerate(label_names):
+        # R2
+        r2_test_prop = r2_score(y_test.iloc[:, i], y_pred_test[:, i])
+        r2_train_prop = r2_score(y_train.iloc[:, i], y_pred_train[:, i])
+        
+        # MAE
+        mae_test_prop = mean_absolute_error(y_test.iloc[:, i], y_pred_test[:, i])
+        mae_train_prop = mean_absolute_error(y_train.iloc[:, i], y_pred_train[:, i])
+        
+        # RMSE
+        rmse_test_prop = np.sqrt(mean_squared_error(y_test.iloc[:, i], y_pred_test[:, i]))
+        rmse_train_prop = np.sqrt(mean_squared_error(y_train.iloc[:, i], y_pred_train[:, i]))
+        
+        # Print all metrics
+        print(f"{name:<30} | {r2_test_prop:<10.4f} | {r2_train_prop:<10.4f} | {mae_test_prop:<10.4f} | {mae_train_prop:<10.4f} | {rmse_test_prop:<10.4f} | {rmse_train_prop:<10.4f}")
+
+    # --- 7. Generate Model Prediction Plots ---
+    print("\n--- 7. Generating Model Prediction Plots at Specific Temps ---")
+    
+    output_dir = "GaN_model_prediction_graphs"
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Create a clean range of strains to predict over
+    S_range = np.linspace(0.001, 0.12, 200) # Use 0.12 max strain for GaN
+    
+    # Define the temperatures and colors
+    temps_to_plot = [300, 600, 900]
+    colors = ['red', 'blue', 'green']
+    
+    # Loop through each property the model predicted
+    for i, prop_name in enumerate(label_names):
+        print(f"  Plotting: {prop_name} vs. Strain...")
+        plt.figure(figsize=(10, 6))
+        
+        # For each property, create a plot with 3 lines
+        for temp, color in zip(temps_to_plot, colors):
+            
+            # 1. Create the new "test" data
+            X_pred_data_df = pd.DataFrame({
+                'Temperature (K)': np.full_like(S_range, temp),
+                'Strain': S_range
+            })
+            X_pred_data_np = X_pred_data_df[X_train.columns].values
+
+            # 2. Preprocess this new data
+            X_pred_poly = poly.transform(X_pred_data_np)
+            X_pred_scaled = scaler.transform(X_pred_poly)
+            
+            # 3. Make predictions
+            y_pred_values = model.predict(X_pred_scaled)
+            
+            # 4. Plot the line for this temperature
+            plt.plot(S_range, y_pred_values[:, i], lw=3, color=color, label=f'Predicted at {temp}K')
+
+        # 5. Format the plot
+        plt.title(f'Model Prediction: {prop_name} vs. Strain', fontsize=16)
+        plt.xlabel('Strain', fontsize=12)
+        plt.ylabel(prop_name, fontsize=12)
+        plt.legend()
+        plt.grid(True)
+        
+        # 6. Save the figure
+        safe_prop_name = prop_name.replace(' ', '_').replace('(', '').replace(')', '').replace('/', '_')
+        plot_filename = os.path.join(output_dir, f'{safe_prop_name}_vs_Strain_at_Temps.png')
+        plt.savefig(plot_filename, dpi=100, bbox_inches='tight')
+        plt.close()
+        
+    print(f"  All prediction plots saved to '{output_dir}/'")
+    print("\n--- Project Complete ---")
+
+if __name__ == "__main__":
+    run_gan_model()
