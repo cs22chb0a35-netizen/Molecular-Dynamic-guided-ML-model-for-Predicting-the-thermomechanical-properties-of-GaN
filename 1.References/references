@@ -1,1 +1,52 @@
+REFERENCES:
 
+
+Flack, T. J.; Pushpakaran, B. N.; Bayne, S. B. “GaN Technology for Power Electronic Applications: A Review.” Journal of Electronic Materials, 45, 2016. URL: /mnt/data/references/Flack_GaN_Technology_Review.pdf
+
+Musumeci, S.; Raciti, A.; Giuffrida, S.; et al. “Gallium Nitride Power Devices in Power Electronics: State of the Art and Perspectives.” Energies, 16(9), 3894, 2023. URL: /mnt/data/references/Musumeci_GaN_Power_Devices_Energies_2023.pdf
+
+Pushpakaran, B. N.; Flack, T. J.; Bayne, S. “Commercial GaN-Based Power Electronic Systems: A Review.” Journal of Electronic Materials, 49, 6247–6274, 2020. URL: /mnt/data/references/Pushpakaran_GaN_Based_Power_Electronic_Systems_2020.pdf
+
+Cuenca, J. A.; Núñez, J.; et al. “Thermal Stress Modelling of Diamond on GaN/III-Nitride High-Electron-Mobility Transistors.” Carbon, 171, 2021. URL: /mnt/data/references/Cuenca_Thermal_Stress_Modelling_Diamond_on_GaN_2021.pdf
+
+Van De Sande, W.; et al. “Thermo-Mechanical Stress Comparison of a GaN and SiC MOSFET in a Photovoltaic Application.” Energies, 13(22), 5900, 2020. URL: /mnt/data/references/VanDeSande_ThermoMechanical_Stress_GaN_SiC_MOSFET_2020.pdf
+
+Sakharova, N. A.; et al. “Numerical Evaluation of the Elastic Moduli of AlN and GaN Nanosheets.” Materials, 17(4), 799, 2024. URL: /mnt/data/references/Sakharova_Numerical_Evaluation_AlN_GaN_2024.pdf
+
+Rouhi, S. “Molecular Dynamics Simulations of Gallium Nitride Nanosheets: Elastic Properties and Stability.” International Journal of Modern Physics C, 29(3), 2018. URL: /mnt/data/references/Rouhi_MD_Simulations_GaN_2018.pdf
+
+Sarma, J. V. N.; et al. “Mechanical Behaviour of Gallium Nitride Nanosheets Using Atomistic Simulations.” Computational Materials Science, 79, 2013. URL: /mnt/data/references/Sarma_Mechanical_Behaviour_GaN_Nanosheets_2013.pdf
+
+Li, Q.; Ruan, X.; et al. “Effect of Stress-Dependent Thermal Conductivity on Thermo-Mechanical Coupling Behaviour in GaN-Based Nanofilm Under Pulse Heat Source.” International Journal of Thermal Sciences, 167, 2021. URL: /mnt/data/references/Li_Ruan_Effect_Stress_Dependent_Thermal_Conductivity_GaN_2021.pdf
+
+Wei, B.; et al. “High-Order Phonon Anharmonicity and Thermal Conductivity in GaN.” Physical Review B, 109, 155204, 2024. URL: /mnt/data/references/Wei_High_Order_Phonon_Anharmonicity_GaN_2024.pdf
+
+Yang, J.; et al. “Impact of Point Defects on the Thermal Conductivity of GaN.” Physical Review B, 111, 104112, 2025. URL: /mnt/data/references/Yang_Impact_Point_Defects_Thermal_Conductivity_GaN_2025.pdf
+
+Zhang, J.; et al. “Piezoelectric Effect on the Thermal Conductivity of Gallium Nitride.” Journal of Applied Physics, 123(3), 035102, 2018. URL: /mnt/data/references/Zhang_Piezoelectric_Effect_Thermal_Conductivity_GaN_2018.pdf
+
+Dong, Z.; et al. “Effects of Ion Irradiation and Temperature on Mechanical Properties of GaN.” Nanomaterials, 13(1), 2023. URL: /mnt/data/references/Dong_Ion_Irradiation_Mechanical_Properties_GaN_2023.pdf
+
+Hassanzadeh, A.; et al. “UO₂–GaN Composites with Enhanced Thermomechanical and Thermophysical Properties: A Molecular Dynamics Study.” Journal of Nuclear Materials, 2025. URL: /mnt/data/references/Hassanzadeh_UO2_GaN_Composites_2025.pdf
+
+Živić, F.; et al. “Materials Informatics: A Review of AI and Machine Learning Applications in Materials Science.” Data-Centric Engineering, 2025. URL: /mnt/data/references/Zivic_Materials_Informatics_2025.pdf
+
+Hussain, A.; et al. “Machine Learning-Based Constitutive Modelling for Material Behaviour.” Mechanics of Materials, 192, 105807, 2024. URL: /mnt/data/references/Hussain_Machine_Learning_Constitutive_Modelling_2024.pdf
+
+Sharma, H.; et al. “A Review of Machine Learning Approaches for Predicting Mechanical Behaviour of Materials.” SN Applied Sciences, 2025. URL: /mnt/data/references/Sharma_ML_Predicting_Mechanical_Behaviour_Materials_2025.pdf
+
+Weng, J.; et al. “A Machine Learning Based Approach for Determining the Stress–Strain Relation of Grey Cast Iron from Nanoindentation.” Mechanics of Materials, 148, 103496, 2020. URL: /mnt/data/references/Weng_ML_Stress_Strain_Grey_Cast_Iron_2020.pdf
+
+Lin, Y.; et al. “A New Regression Model for the Prediction of the Stress–Strain Relationship of Thin-Walled Metal Materials.” Materials, 16(22), 7145, 2023. URL: /mnt/data/references/Lin_Regression_Stress_Strain_ThinWalled_Materials_2023.pdf
+
+Goodfellow, I.; Bengio, Y.; Courville, A. Deep Learning. MIT Press, 2016. URL: /mnt/data/references/Goodfellow_Deep_Learning_2016.pdf
+
+Géron, A. Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow. 2nd ed., O’Reilly Media, 2019. URL: /mnt/data/references/Geron_HandsOn_ML_2019.pdf
+
+Scikit-Learn Developers. “Linear Models, PolynomialFeatures, and Preprocessing,” Scikit-Learn User Guide. URL: /mnt/data/references/ScikitLearn_UserGuide_LinearModels.pdf
+
+NumPy Developers. NumPy Documentation. URL: /mnt/data/references/NumPy_UserGuide.pdf
+
+Pandas Developers. pandas: Python Data Analysis Library. URL: /mnt/data/references/Pandas_Documentation.pdf
+
+Callister, J. R.; Rethwisch, D. G. Materials Science and Engineering: An Introduction. 10th ed., Wiley, 2018. URL: /mnt/data/references/Callister_Materials_Science_Engineering_2018.pdf
